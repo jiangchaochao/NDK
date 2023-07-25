@@ -1,7 +1,6 @@
 # 常用CMake 语法
 
 
-
 #### 一. cmake 版本号声明
 
 ```cmake
@@ -42,6 +41,15 @@ FILE(GLOB SRCS "*.CPP" "*.h")
 #### 五. 生成一个库
 
 ```cmake
+
+动态库和静态库的区别：
+					动态库是共享的
+					静态库是独占的
+举个例子就是，有两个应用程序，A和B，他们两个都依赖 test.so
+,这个test.so在内存中就只有一份，占用也是一份内存
+
+如果我们给test库打包成test.a,那么A和B会各自独占一份test.a那么在内存上，就会占用两份空间
+
 add_library( # Sets the name of the library.
         srt-lib         # 库的名字
 
