@@ -1,0 +1,10 @@
+# ninja log v5
+0	10	1690639349	test/CMakeFiles/test.dir/src/test.c.o	fe76a11440f4d9c3
+10	19	1690639349	/home/jiangc/develop/ndk/SecondLesson/app/build/intermediates/cxx/Debug/5b5z6i1p/obj/x86_64/libtest.so	3e5731be9db5dd29
+0	181	1690639349	CMakeFiles/secondlesson.dir/native-lib.cpp.o	e86e7e684bad6732
+0	8	1690639471	test/CMakeFiles/test.dir/src/test.c.o	fe76a11440f4d9c3
+8	13	1690639471	/home/jiangc/develop/ndk/SecondLesson/app/build/intermediates/cxx/Debug/5b5z6i1p/obj/x86_64/libtest.so	3e5731be9db5dd29
+1	10	1690639625	test/CMakeFiles/test.dir/src/test.c.o	fe76a11440f4d9c3
+10	15	1690639625	/home/jiangc/develop/ndk/SecondLesson/app/build/intermediates/cxx/Debug/5b5z6i1p/obj/x86_64/libtest.so	3e5731be9db5dd29
+0	149	1690639625	CMakeFiles/secondlesson.dir/native-lib.cpp.o	e86e7e684bad6732
+149	164	1690639626	/home/jiangc/develop/ndk/SecondLesson/app/build/intermediates/cxx/Debug/5b5z6i1p/obj/x86_64/libsecondlesson.so	93d70631237ffcef

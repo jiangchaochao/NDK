@@ -1,0 +1,50 @@
+{
+  "buildFiles": [
+    "/home/jiangc/develop/ndk/SecondLesson/app/src/main/cpp/CMakeLists.txt",
+    "/home/jiangc/develop/ndk/SecondLesson/app/src/main/cpp/test/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/home/jiangc/Android/Sdk/cmake/3.18.1/bin/ninja",
+      "-C",
+      "/home/jiangc/develop/ndk/SecondLesson/app/.cxx/Debug/5b5z6i1p/x86_64",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/home/jiangc/Android/Sdk/cmake/3.18.1/bin/ninja",
+    "-C",
+    "/home/jiangc/develop/ndk/SecondLesson/app/.cxx/Debug/5b5z6i1p/x86_64",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "secondlesson::@6890427a1f51a3e7e1df": {
+      "toolchain": "toolchain",
+      "abi": "x86_64",
+      "artifactName": "secondlesson",
+      "output": "/home/jiangc/develop/ndk/SecondLesson/app/build/intermediates/cxx/Debug/5b5z6i1p/obj/x86_64/libsecondlesson.so",
+      "runtimeFiles": [
+        "/home/jiangc/develop/ndk/SecondLesson/app/build/intermediates/cxx/Debug/5b5z6i1p/obj/x86_64/libtest.so"
+      ]
+    },
+    "test::@36f028580bb02cc8272a": {
+      "toolchain": "toolchain",
+      "abi": "x86_64",
+      "artifactName": "test",
+      "output": "/home/jiangc/develop/ndk/SecondLesson/app/build/intermediates/cxx/Debug/5b5z6i1p/obj/x86_64/libtest.so",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "/home/jiangc/Android/Sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/clang.lld",
+      "cppCompilerExecutable": "/home/jiangc/Android/Sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++.lld"
+    }
+  },
+  "cFileExtensions": [
+    "c"
+  ],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

@@ -1,0 +1,6 @@
+/home/jiangc/develop/ndk/SecondLesson/example2/app/.cxx/Debug/2kj1j6z6/x86/CMakeFiles/rebuild_cache.dir
+/home/jiangc/develop/ndk/SecondLesson/example2/app/.cxx/Debug/2kj1j6z6/x86/CMakeFiles/edit_cache.dir
+/home/jiangc/develop/ndk/SecondLesson/example2/app/.cxx/Debug/2kj1j6z6/x86/CMakeFiles/secondlesson.dir
+/home/jiangc/develop/ndk/SecondLesson/example2/app/.cxx/Debug/2kj1j6z6/x86/test/CMakeFiles/rebuild_cache.dir
+/home/jiangc/develop/ndk/SecondLesson/example2/app/.cxx/Debug/2kj1j6z6/x86/test/CMakeFiles/edit_cache.dir
+/home/jiangc/develop/ndk/SecondLesson/example2/app/.cxx/Debug/2kj1j6z6/x86/test/CMakeFiles/test.dir
