@@ -1,3 +1,0 @@
-/home/jiangc/develop/ndk/FirstLesson/example2/build/CMakeFiles/test.dir
-/home/jiangc/develop/ndk/FirstLesson/example2/build/CMakeFiles/edit_cache.dir
-/home/jiangc/develop/ndk/FirstLesson/example2/build/CMakeFiles/rebuild_cache.dir
