@@ -38,7 +38,7 @@
 
 指针的指针，也叫二级指针，它指向的是一级指针，一级指针指向的是可以操作的内存空间。如下图，一级指针直接指向可操作的内存空间，指针的指针是指向了指针，然后通过指针再指向可操作的内存空间(图中的102也是一个指针)。
 
-![image-20230813102620884](/home/jiangc/.config/Typora/typora-user-images/image-20230813102620884.png)
+![image-20230813102620884](https://github.com/jiangchaochao/NDK/blob/main/Lesson4/doc/image-20230813102620884.png)
 
 在了解了上面的基本概念之后，补充一下在C中和C++中调用上的一些区别，我们看一下jni.h
 
