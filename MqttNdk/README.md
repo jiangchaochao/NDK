@@ -24,11 +24,11 @@ git clone https://github.com/eclipse/paho.mqtt.c.git
 
 模块化考虑，在新建的工程里新建一个Android Native module，用于封装mqtt的库，提供java接口,目录结构如下图
 
-<img src="C:\Users\chao.jiang\AppData\Roaming\Typora\typora-user-images\image-20231115193730943.png" alt="image-20231115193730943" align="left"/>
+![](https://github.com/jiangchaochao/NDK/blob/main/MqttNdk/image-20231115193730943.png)
 
 #### 三. 参考源码提供的Android.mk
+![](https://github.com/jiangchaochao/NDK/blob/main/MqttNdk/image-20231115182011223.png)
 
-<img src="C:\Users\chao.jiang\AppData\Roaming\Typora\typora-user-images\image-20231115182011223.png" alt="image-20231115182011223" align="left"/>
 
 Android.mk的主要内容，对于应用层的移植，我们需要根据这个文件转换成CMakeList.txt
 
@@ -385,14 +385,12 @@ chmod 777 mkssl
 #### 五. 拷贝动态库到指定目录
 
 参考第一张图，将openssl生成的动态库拷贝到mqtt目录下的libs中
-
-<img src="C:\Users\chao.jiang\AppData\Roaming\Typora\typora-user-images\image-20231115194629348.png" alt="image-20231115194629348" align="left"/>
+![](https://github.com/jiangchaochao/NDK/blob/main/MqttNdk/image-20231115194629348.png)
 
 #### 六. 拷贝头文件
 
 参考第一张图，将openssl生成的头文件拷贝到cpp中
-
-<img src="C:\Users\chao.jiang\AppData\Roaming\Typora\typora-user-images\image-20231115194756254.png" alt="image-20231115194756254" align="left"/>
+![](https://github.com/jiangchaochao/NDK/blob/main/MqttNdk/image-20231115194756254.png)
 
 #### 七. 在cmake中包含这些头文件
 
