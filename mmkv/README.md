@@ -53,9 +53,11 @@ add_library(${CMAKE_PROJECT_NAME} SHARED
 # can link libraries from various origins, such as libraries defined in this
 # build script, prebuilt third-party libraries, or Android system libraries.
 target_link_libraries(${CMAKE_PROJECT_NAME}
+        core
+        # pthread  这里注意，不能链接pthread，在NDK中使用stdc++
+        stdc++
         # List libraries link to the target library
         android
         log)
 ```
-
 然后直接编译项目即可，具体封装可按照mmkv的api文档进行。详细内容可直接给项目导入Android studio查看
