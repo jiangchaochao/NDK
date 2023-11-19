@@ -116,12 +116,10 @@ public class com.example.javap.TestJni {
 ##### 1.4 设置Android Studio javap
 
 打开Android  Studio ，File->Settings->Tools->External Tools扩展工具栏，如下图：
-
-![image-20231119174245513](C:\Users\jiangchao\AppData\Roaming\Typora\typora-user-images\image-20231119174245513.png)
+![](https://github.com/jiangchaochao/NDK/blob/main/NdkCall/image-20231119174245513.png?raw=true)
 
 点击+号按钮
-
-![image-20231119174704232](C:\Users\jiangchao\AppData\Roaming\Typora\typora-user-images\image-20231119174704232.png)
+![](https://github.com/jiangchaochao/NDK/blob/main/NdkCall/image-20231119174704232.png?raw=true)
 
 填写信息如下：
 
@@ -133,11 +131,10 @@ Working directory: $OutputPath$
 
 首先编译一下项目，然后通过右键javap获取函数签名
 
-![image-20231119174910736](C:\Users\jiangchao\AppData\Roaming\Typora\typora-user-images\image-20231119174910736.png)
+![](https://github.com/jiangchaochao/NDK/blob/main/NdkCall/image-20231119174910736.png?raw=true)
 
 获取到的签名如下：
-
-![image-20231119175155744](C:\Users\jiangchao\AppData\Roaming\Typora\typora-user-images\image-20231119175155744.png)
+![](https://github.com/jiangchaochao/NDK/blob/main/NdkCall/image-20231119175155744.png?raw=true)
 
 这样我们就可以相对比较快捷的得到函数签名了。
 
