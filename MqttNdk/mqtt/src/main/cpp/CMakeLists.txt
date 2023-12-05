@@ -142,9 +142,9 @@ target_include_directories(mqtt PUBLIC openssl/${CMAKE_ANDROID_ARCH_ABI}/include
 #
 target_link_libraries(mqtt
         paho-mqtt3c
-        #        libpaho-mqtt3cs
+        paho-mqtt3cs
         paho-mqtt3a
-        #        libpaho-mqtt3as
+        paho-mqtt3as
         ${LIBS_SYSTEM}
         crypto
         openssl
