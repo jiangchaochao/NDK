@@ -23,7 +23,6 @@ SET(PAHO_BUILD_STATIC FALSE CACHE BOOL "Build static library")
 include_directories(mqttsrc)
 include_directories(openssl/${CMAKE_ANDROID_ARCH_ABI}/include/)
 include_directories(./)
-
 # 通用源文件
 set(libpaho-mqtt3_local_src_c_files_common
         mqttsrc/MQTTProtocolClient.c
@@ -50,24 +49,54 @@ set(libpaho-mqtt3_local_src_c_files_common
         mqttsrc/Proxy.c
         mqttsrc/SHA1.c
         )
-# android 需要连接的库
-SET(LIBS_SYSTEM c dl)
 
-# libpaho-mqtt3_local_src_c_files_c
-set(libpaho-mqtt3_local_src_c_files_c
-        mqttsrc/MQTTClient.c
-        )
+# 如果没有开启openssl，则不编译paho-mqtt3c和paho-mqtt3a，经过实践完全可以用加密的代替，因为加密的不传openssl的参数就是不加密的。
+IF (!PAHO_WITH_SSL)
+    message("使用非加密库编译.......")
+    # android 需要连接的库
+    SET(LIBS_SYSTEM c dl)
+
+    # libpaho-mqtt3_local_src_c_files_c
+    set(libpaho-mqtt3_local_src_c_files_c
+            mqttsrc/MQTTClient.c
+            )
+    # libpaho-mqtt3_local_src_c_files_a
+    set(libpaho-mqtt3_local_src_c_files_a
+            mqttsrc/MQTTAsyncUtils.c
+            mqttsrc/MQTTAsync.c
+            )
+
+    # 如果开启了动态库
+    IF (PAHO_BUILD_SHARED)
+        # 定义一个OBJECT 库，提高编译速度
+        ADD_LIBRARY(common_obj OBJECT ${libpaho-mqtt3_local_src_c_files_common})
+        SET_TARGET_PROPERTIES(common_obj PROPERTIES
+                POSITION_INDEPENDENT_CODE ON
+                COMPILE_DEFINITIONS "PAHO_MQTT_EXPORTS=1")
+    ENDIF ()
+
+    # paho-mqtt3c、paho-mqtt3a
+    IF (PAHO_BUILD_SHARED)
+        # libpaho-mqtt3c
+        ADD_LIBRARY(paho-mqtt3c SHARED $<TARGET_OBJECTS:common_obj> ${libpaho-mqtt3_local_src_c_files_c})
+        # libpaho-mqtt3a
+        ADD_LIBRARY(paho-mqtt3a SHARED $<TARGET_OBJECTS:common_obj> ${libpaho-mqtt3_local_src_c_files_a})
+        # 连接库
+        TARGET_LINK_LIBRARIES(paho-mqtt3c ${LIBS_SYSTEM})
+        TARGET_LINK_LIBRARIES(paho-mqtt3a ${LIBS_SYSTEM})
+        # 设置库的属性
+        SET_TARGET_PROPERTIES(
+                paho-mqtt3c paho-mqtt3a PROPERTIES
+                VERSION "1.3.13"
+                SOVERSION "1"
+                COMPILE_DEFINITIONS "PAHO_MQTT_EXPORTS=1")
+    ENDIF ()
+ENDIF ()
 
 # libpaho-mqtt3_local_src_c_files_cs
 set(libpaho-mqtt3_local_src_c_files_cs
         mqttsrc/MQTTClient.c
         mqttsrc/SSLSocket.c
-        )
-
-# libpaho-mqtt3_local_src_c_files_a
-set(libpaho-mqtt3_local_src_c_files_a
-        mqttsrc/MQTTAsyncUtils.c
-        mqttsrc/MQTTAsync.c
         )
 
 # libpaho-mqtt3_local_src_c_files_as
@@ -84,34 +113,10 @@ set_target_properties(crypto PROPERTIES IMPORTED_LOCATION ${CMAKE_CURRENT_SOURCE
 add_library(openssl SHARED IMPORTED)
 set_target_properties(openssl PROPERTIES IMPORTED_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/../../../libs/${CMAKE_ANDROID_ARCH_ABI}/libssl.so)
 
-# 如果开启了动态库
-IF (PAHO_BUILD_SHARED)
-    # 定义一个OBJECT 库，提高编译速度
-    ADD_LIBRARY(common_obj OBJECT ${libpaho-mqtt3_local_src_c_files_common})
-    SET_TARGET_PROPERTIES(common_obj PROPERTIES
-            POSITION_INDEPENDENT_CODE ON
-            COMPILE_DEFINITIONS "PAHO_MQTT_EXPORTS=1")
-ENDIF ()
-
-# paho-mqtt3c、paho-mqtt3a
-IF (PAHO_BUILD_SHARED)
-    # libpaho-mqtt3c
-    ADD_LIBRARY(paho-mqtt3c SHARED $<TARGET_OBJECTS:common_obj> ${libpaho-mqtt3_local_src_c_files_c})
-    # libpaho-mqtt3a
-    ADD_LIBRARY(paho-mqtt3a SHARED $<TARGET_OBJECTS:common_obj> ${libpaho-mqtt3_local_src_c_files_a})
-    # 连接库
-    TARGET_LINK_LIBRARIES(paho-mqtt3c ${LIBS_SYSTEM})
-    TARGET_LINK_LIBRARIES(paho-mqtt3a ${LIBS_SYSTEM})
-    # 设置库的属性
-    SET_TARGET_PROPERTIES(
-            paho-mqtt3c paho-mqtt3a PROPERTIES
-            VERSION "1.3.13"
-            SOVERSION "1"
-            COMPILE_DEFINITIONS "PAHO_MQTT_EXPORTS=1")
-ENDIF ()
 
 # 如果开启了openssl
 IF (PAHO_WITH_SSL)
+    message("使用加密编译...")
     IF (PAHO_BUILD_SHARED)
         # 重新编译一个带SSL的OBJECT库
         ADD_LIBRARY(common_ssl_obj OBJECT ${libpaho-mqtt3_local_src_c_files_common})
@@ -122,16 +127,17 @@ IF (PAHO_WITH_SSL)
         SET_PROPERTY(TARGET common_ssl_obj PROPERTY COMPILE_DEFINITIONS "OPENSSL=1;PAHO_MQTT_EXPORTS=1")
         ADD_LIBRARY(paho-mqtt3cs SHARED $<TARGET_OBJECTS:common_ssl_obj> ${libpaho-mqtt3_local_src_c_files_cs})
         ADD_LIBRARY(paho-mqtt3as SHARED $<TARGET_OBJECTS:common_ssl_obj> ${libpaho-mqtt3_local_src_c_files_as})
+        # 这里设置属性，有两个比较重要的点，是定义了两个宏，使用openssl必须定义OPENSSL这个宏，否则连接会返回-1，调试发现是因为没有这个宏定义就不会识别mqtts、ssl等加密的协议头。
         SET_TARGET_PROPERTIES(
                 paho-mqtt3cs paho-mqtt3as PROPERTIES
                 VERSION "1.3.13"
                 SOVERSION "1"
                 COMPILE_DEFINITIONS "OPENSSL=1;PAHO_MQTT_EXPORTS=1")
-        FOREACH(TARGET paho-mqtt3cs paho-mqtt3as)
+        FOREACH (TARGET paho-mqtt3cs paho-mqtt3as)
             TARGET_LINK_LIBRARIES(${TARGET}
                     PUBLIC
                     openssl crypto ${LIBS_SYSTEM})
-        ENDFOREACH()
+        ENDFOREACH ()
     ENDIF ()
 ENDIF ()
 
@@ -140,14 +146,22 @@ add_library(${CMAKE_PROJECT_NAME} SHARED
         ${SOURCE_FILES}
         mqtt.cpp)
 target_include_directories(mqtt PUBLIC openssl/${CMAKE_ANDROID_ARCH_ABI}/include)
-#
-target_link_libraries(mqtt
-        paho-mqtt3c
-        paho-mqtt3cs
-        paho-mqtt3a
-        paho-mqtt3as
-        ${LIBS_SYSTEM}
-        crypto
-        openssl
-        android
-        log)
+# 这里根据宏定义链接库的类型
+# 如果开启了openssl，则连接带加密的库
+IF (PAHO_WITH_SSL)
+    target_link_libraries(mqtt
+            paho-mqtt3cs
+            paho-mqtt3as
+            ${LIBS_SYSTEM}
+            crypto
+            openssl
+            android
+            log)
+ELSE () # 否则连接不带加密的，这里建议直接开启，避免后续需要使用加密功能还要修改
+    target_link_libraries(mqtt
+            paho-mqtt3c
+            paho-mqtt3a
+            ${LIBS_SYSTEM}
+            android
+            log)
+ENDIF ()
