@@ -22,6 +22,7 @@ SET(PAHO_BUILD_STATIC FALSE CACHE BOOL "Build static library")
 # 包含子目录相关头文件
 include_directories(mqttsrc)
 include_directories(openssl/${CMAKE_ANDROID_ARCH_ABI}/include/)
+include_directories(./)
 
 # 通用源文件
 set(libpaho-mqtt3_local_src_c_files_common
