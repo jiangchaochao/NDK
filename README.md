@@ -31,4 +31,12 @@ https://t.bilibili.com/864276153014157332?share_source=pc_native
 Java函数签名及NDK调用Java函数的方法
 https://t.bilibili.com/865701321961898002?share_source=pc_native
 
+#### 十. 第十节课
+linux 线程的基本使用
+https://www.bilibili.com/video/BV1L34y1w7Mi/?share_source=copy_web&vd_source=ab7cd6df1ff71123a7c987d53b369f62
 
+#### 十一. NDK之函数的动态注册
+
+NDK第十一讲-NDK函数之动态注册
+
+https://www.bilibili.com/video/BV1qN411j7aF/?share_source=copy_web&vd_source=ab7cd6df1ff71123a7c987d53b369f62
