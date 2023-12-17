@@ -40,3 +40,8 @@ https://www.bilibili.com/video/BV1L34y1w7Mi/?share_source=copy_web&vd_source=ab7
 NDK第十一讲-NDK函数之动态注册
 
 https://www.bilibili.com/video/BV1qN411j7aF/?share_source=copy_web&vd_source=ab7cd6df1ff71123a7c987d53b369f62
+
+
+#### 十二. NDK线程函数
+NDK第十二讲-NDK线程函数
+https://www.bilibili.com/video/BV1aj411W7JT/?vd_source=6a1be4edd8c00632c362667aa4d39318
